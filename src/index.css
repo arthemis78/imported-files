@@ -1,0 +1,232 @@
+@tailwind base;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* USDT NOW Design System - Crypto Flash Loan Interface */
+
+@layer base {
+  :root {
+    /* Dark crypto theme */
+    --background: 225 15% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 225 25% 12%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 225 25% 12%;
+    --popover-foreground: 210 40% 98%;
+
+    /* USDT Green primary */
+    --primary: 140 65% 52%;
+    --primary-foreground: 210 40% 98%;
+
+    /* Tron Blue secondary */
+    --secondary: 220 85% 58%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 225 25% 20%;
+    --muted-foreground: 215 15% 65%;
+
+    /* Crypto accent colors */  
+    --accent: 280 75% 65%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 225 25% 20%;
+    --input: 225 25% 15%;
+    --ring: 140 65% 52%;
+
+    --radius: 1rem;
+
+    /* Custom crypto gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(140, 65%, 52%), hsl(120, 60%, 45%));
+    --gradient-secondary: linear-gradient(135deg, hsl(220, 85%, 58%), hsl(260, 70%, 55%));
+    --gradient-accent: linear-gradient(135deg, hsl(280, 75%, 65%), hsl(320, 70%, 60%));
+    --gradient-crypto: linear-gradient(135deg, hsl(140, 65%, 52%), hsl(220, 85%, 58%), hsl(280, 75%, 65%));
+    --gradient-card: linear-gradient(135deg, hsl(225, 25%, 12%), hsl(225, 25%, 18%));
+    
+    /* Glow effects */
+    --glow-primary: 0 0 30px hsl(140, 65%, 52%, 0.5);
+    --glow-secondary: 0 0 30px hsl(220, 85%, 58%, 0.5);
+    --glow-accent: 0 0 30px hsl(280, 75%, 65%, 0.5);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Sidebar colors - mantendo para compatibilidade */
+    --sidebar-background: 225 25% 12%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 140 65% 52%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 225 25% 20%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 225 25% 20%;
+    --sidebar-ring: 140 65% 52%;
+  }
+  
+  html {
+    background: transparent !important;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply text-foreground;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: transparent !important;
+    overflow-x: hidden;
+  }
+  
+  #root {
+    background: transparent !important;
+  }
+}
+
+@layer components {
+  /* Crypto card styles */
+  .crypto-card {
+    @apply bg-card border border-border rounded-2xl p-6 relative overflow-hidden;
+    background: var(--gradient-card);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .crypto-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--gradient-crypto);
+    opacity: 0.6;
+  }
+
+  /* Gradient backgrounds */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+  
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+  
+  .gradient-crypto {
+    background: var(--gradient-crypto);
+  }
+
+  /* Glow effects */
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+  
+  .glow-secondary {
+    box-shadow: var(--glow-secondary);
+  }
+  
+  .glow-accent {
+    box-shadow: var(--glow-accent);
+  }
+
+  /* Hover animations */
+  .hover-glow:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--glow-primary);
+    transition: var(--transition-smooth);
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.02);
+    transition: var(--transition-smooth);
+  }
+
+  /* Animated gradient borders */
+  .animated-border {
+    position: relative;
+    background: var(--gradient-card);
+    border-radius: 1rem;
+  }
+  
+  .animated-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    padding: 2px;
+    background: var(--gradient-crypto);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    animation: border-spin 3s linear infinite;
+  }
+
+  /* Loading pulse for crypto operations */
+  .crypto-pulse {
+    animation: crypto-pulse 2s ease-in-out infinite;
+  }
+}
+
+/* Security and Anti-Copy Protection Styles */
+
+/* Force all container backgrounds to be transparent */
+* {
+  box-sizing: border-box;
+}
+
+/* Override any potential white backgrounds */
+div:not(.crypto-card):not([class*="bg-"]):not([style*="background"]) {
+  background: transparent !important;
+}
+
+/* Disable text selection globally (only in production) */
+.production * {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Re-enable text selection for input fields */
+.production input, .production textarea, .production [contenteditable="true"] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Disable drag and drop in production */
+.production * {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+/* Copyright watermark */
+body::after {
+  content: "© 2024 USDT NOW - Proprietary Software";
+  position: fixed;
+  bottom: -100px;
+  right: -100px;
+  color: transparent;
+  font-size: 1px;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+}

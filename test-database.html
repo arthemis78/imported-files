@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Database Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        .test-section {
+            background-color: #2d2d2d;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #444;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .delete-btn {
+            background-color: #f44336;
+        }
+        .delete-btn:hover {
+            background-color: #da190b;
+        }
+        .results {
+            background-color: #0a0a0a;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            border: 1px solid #555;
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Mock Database Test Interface</h1>
+    <p>Test the USDT NOW Flasher Mock Database functionality</p>
+
+    <div class="test-section">
+        <h3>📊 Database Status</h3>
+        <button onclick="checkDatabaseStatus()">Check Database Status</button>
+        <button onclick="clearAllData()">Clear All Data</button>
+        <div id="status-results" class="results"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>➕ Create License</h3>
+        <input type="text" id="clientName" placeholder="Client Name" value="Test Client">
+        <select id="duration">
+            <option value="1week">1 Week - $2.50</option>
+            <option value="1month" selected>1 Month - $10</option>
+            <option value="2months">2 Months - $20</option>
+            <option value="3months">3 Months - $30</option>
+            <option value="6months">6 Months - $50</option>
+            <option value="1year">1 Year - $90</option>
+        </select>
+        <button onclick="createLicense()">Create License</button>
+        <div id="create-results" class="results"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>📋 License Management</h3>
+        <button onclick="loadAllLicenses()">Load All Licenses</button>
+        <button onclick="loadActiveLicenses()">Load Active Licenses</button>
+        <button onclick="loadExpiredLicenses()">Load Expired Licenses</button>
+        <div id="license-results" class="results"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>🗑️ License Actions</h3>
+        <input type="text" id="licenseId" placeholder="License ID">
+        <button onclick="deleteLicense()" class="delete-btn">Delete License</button>
+        <button onclick="deactivateLicense()">Deactivate License</button>
+        <button onclick="reactivateLicense()">Reactivate License</button>
+        <div id="action-results" class="results"></div>
+    </div>
+
+    <script>
+        // Note: This is a test interface that would work in the browser console
+        // In the actual application, you would import the mockDatabaseService
+
+        function log(message) {
+            console.log(message);
+            return message;
+        }
+
+        function displayResults(elementId, content) {
+            document.getElementById(elementId).textContent = content;
+        }
+
+        async function checkDatabaseStatus() {
+            const result = log('🔍 Database status check requested...\n\nTo test in real environment:\n1. Open browser console\n2. Navigate to the app\n3. Use: await mockDatabaseService.getAllLicenses()');
+            displayResults('status-results', result);
+        }
+
+        async function createLicense() {
+            const clientName = document.getElementById('clientName').value;
+            const duration = document.getElementById('duration').value;
+            
+            const result = log(`🔑 Create license requested for: ${clientName}, Duration: ${duration}\n\nTo test in real environment:\n1. Open browser console\n2. Use: await mockDatabaseService.createLicense('${clientName}', '${duration}')`);
+            displayResults('create-results', result);
+        }
+
+        async function loadAllLicenses() {
+            const result = log('📊 Load all licenses requested...\n\nTo test in real environment:\n1. Open browser console\n2. Use: await mockDatabaseService.getAllLicenses()');
+            displayResults('license-results', result);
+        }
+
+        async function loadActiveLicenses() {
+            const result = log('✅ Load active licenses requested...\n\nTo test in real environment:\n1. Open browser console\n2. Use: await mockDatabaseService.getActiveLicenses()');
+            displayResults('license-results', result);
+        }
+
+        async function loadExpiredLicenses() {
+            const result = log('❌ Load expired licenses requested...\n\nTo test in real environment:\n1. Open browser console\n2. Use: await mockDatabaseService.getExpiredLicenses()');
+            displayResults('license-results', result);
+        }
+
+        async function deleteLicense() {
+            const licenseId = document.getElementById('licenseId').value;
+            if (!licenseId) {
+                alert('Please enter a License ID');
+                return;
+            }
+            
+            const result = log(`🗑️ Delete license requested for ID: ${licenseId}\n\nTo test in real environment:\n1. Open browser console\n2. Use: await mockDatabaseService.deleteLicense('${licenseId}')`);
+            displayResults('action-results', result);
+        }
+
+        async function deactivateLicense() {
+            const licenseId = document.getElementById('licenseId').value;
+            if (!licenseId) {
+                alert('Please enter a License ID');
+                return;
+            }
+            
+            const result = log(`⏸️ Deactivate license requested for ID: ${licenseId}\n\nTo test in real environment:\n1. Open browser console\n2. Use: await mockDatabaseService.deactivateLicense('${licenseId}')`);
+            displayResults('action-results', result);
+        }
+
+        async function reactivateLicense() {
+            const licenseId = document.getElementById('licenseId').value;
+            if (!licenseId) {
+                alert('Please enter a License ID');
+                return;
+            }
+            
+            const result = log(`🔄 Reactivate license requested for ID: ${licenseId}\n\nTo test in real environment:\n1. Open browser console\n2. Use: await mockDatabaseService.reactivateLicense('${licenseId}')`);
+            displayResults('action-results', result);
+        }
+
+        async function clearAllData() {
+            if (confirm('Are you sure you want to clear all data? This action cannot be undone.')) {
+                const result = log('🗑️ Clear all data requested...\n\nTo test in real environment:\n1. Open browser console\n2. Use: await mockDatabaseService.clearAllData()');
+                displayResults('status-results', result);
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            log('🧪 Mock Database Test Interface loaded');
+            displayResults('status-results', '💻 Ready to test! Use the buttons above to test database functionality.');
+        });
+    </script>
+</body>
+</html>

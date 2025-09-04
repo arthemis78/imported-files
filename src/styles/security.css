@@ -1,0 +1,150 @@
+/* Security styles disabled for better user experience */
+
+/* Allow normal text selection */
+* {
+  -webkit-touch-callout: auto;
+  -webkit-user-select: auto;
+  -khtml-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
+}
+
+/* Enable text selection for input fields */
+input, textarea, [contenteditable="true"] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Allow drag and drop */
+* {
+  -webkit-user-drag: auto;
+  -khtml-user-drag: auto;
+  -moz-user-drag: auto;
+  -o-user-drag: auto;
+  user-drag: auto;
+}
+
+/* Enable image dragging */
+img {
+  -webkit-user-drag: auto;
+  -khtml-user-drag: auto;
+  -moz-user-drag: auto;
+  -o-user-drag: auto;
+  user-drag: auto;
+  pointer-events: auto;
+}
+
+/* Disable highlighting on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/* Hide scrollbars to prevent content analysis */
+::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* Disable text selection animation */
+::selection {
+  background: transparent;
+}
+
+::-moz-selection {
+  background: transparent;
+}
+
+/* Prevent zoom on mobile */
+input, select, textarea {
+  font-size: 16px !important;
+}
+
+/* Hide cursor on certain elements */
+.no-cursor {
+  cursor: none !important;
+}
+
+/* Anti-screenshot protection */
+.protected-content {
+  position: relative;
+}
+
+.protected-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Blur protection for sensitive data */
+.blur-protection {
+  filter: blur(0px);
+  transition: filter 0.3s ease;
+}
+
+.blur-protection:hover {
+  filter: blur(0px);
+}
+
+/* Copyright watermark */
+body::after {
+  content: "© 2024 USDT NOW - Proprietary Software";
+  position: fixed;
+  bottom: -100px;
+  right: -100px;
+  color: transparent;
+  font-size: 1px;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+}
+
+/* Hide development indicators */
+.development-only {
+  display: none !important;
+}
+
+/* Prevent iframe embedding */
+html {
+  frame-ancestors: 'none';
+  -webkit-frame-options: deny;
+  -moz-frame-options: deny;
+  -ms-frame-options: deny;
+  frame-options: deny;
+}
+
+/* Disable print styles */
+@media print {
+  * {
+    display: none !important;
+  }
+  
+  body::before {
+    content: "This content is protected and cannot be printed.";
+    display: block !important;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: #000;
+  }
+}
